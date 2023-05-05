@@ -1,0 +1,36 @@
+version: "3.4"
+
+# TODO: How to use?
+
+services:
+  prometheus:
+    build:
+      context: prometheus
+    environment:
+      # Linux:  http://localhost:8008
+      # MacOSX: http://host.docker.internal:8008
+      BEACON_URL: localhost:8008
+      VC_URL: localhost:5064
+    restart: always
+    network_mode: host
+    volumes:
+      - "prometheus:/prometheus"
+
+  grafana:
+    build:
+      context: ..
+      dockerfile: docker/grafana
+    restart: always
+    network_mode: host
+    volumes:
+      - "grafana:/var/lib/grafana"
+      - "grafana-dashboards:/dashboards"
+    environment:
+      # Linux:  http://localhost:9090
+      # MacOSX: http://host.docker.internal:9090
+      PROMETHEUS_URL: http://localhost:9090
+
+volumes:
+  prometheus:
+  grafana:
+  grafana-dashboards:

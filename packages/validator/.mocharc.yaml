@@ -1,0 +1,6 @@
+colors: true
+extension: ["ts"]
+require:
+  - ./test/setup.ts
+node-option:
+  - "loader=ts-node/esm"

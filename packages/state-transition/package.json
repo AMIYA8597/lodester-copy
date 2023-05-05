@@ -1,0 +1,85 @@
+{
+  "name": "@lodestar/state-transition",
+  "description": "Beacon Chain state transition function and utils",
+  "license": "Apache-2.0",
+  "author": "ChainSafe Systems",
+  "homepage": "https://github.com/ChainSafe/lodestar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:ChainSafe/lodestar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChainSafe/lodestar/issues"
+  },
+  "version": "1.7.2",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    },
+    "./block": {
+      "import": "./lib/block/index.js"
+    },
+    "./epoch": {
+      "import": "./lib/epoch/index.js"
+    },
+    "./slot": {
+      "import": "./lib/slot/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "*",
+        "lib/*",
+        "lib/*/index"
+      ]
+    }
+  },
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.js",
+    "lib/**/*.js.map",
+    "*.d.ts",
+    "*.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf lib && rm -f *.tsbuildinfo",
+    "build": "tsc -p tsconfig.build.json",
+    "build:lib:watch": "yarn run build:lib --watch",
+    "build:release": "yarn clean && yarn build",
+    "build:types:watch": "yarn run build:types --watch",
+    "check-build": "node -e \"(async function() { await import('./lib/index.js') })()\"",
+    "check-types": "tsc",
+    "lint": "eslint --color --ext .ts src/ test/",
+    "lint:fix": "yarn run lint --fix",
+    "test:unit": "mocha 'test/unit/**/*.test.ts'",
+    "check-readme": "typescript-docs-verifier"
+  },
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@chainsafe/as-sha256": "^0.3.1",
+    "@chainsafe/bls": "7.1.1",
+    "@chainsafe/persistent-merkle-tree": "^0.5.0",
+    "@chainsafe/persistent-ts": "^0.19.1",
+    "@chainsafe/ssz": "^0.10.2",
+    "@lodestar/config": "^1.7.2",
+    "@lodestar/params": "^1.7.2",
+    "@lodestar/types": "^1.7.2",
+    "@lodestar/utils": "^1.7.2",
+    "bigint-buffer": "^1.1.5",
+    "buffer-xor": "^2.0.2"
+  },
+  "devDependencies": {
+    "@chainsafe/blst": "^0.2.8",
+    "@types/buffer-xor": "^2.0.0",
+    "@types/mockery": "^1.4.30",
+    "mockery": "^2.1.0"
+  },
+  "keywords": [
+    "ethereum",
+    "eth-consensus",
+    "beacon",
+    "blockchain"
+  ]
+}

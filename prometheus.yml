@@ -1,0 +1,12 @@
+scrape_configs:
+  - job_name: beacon
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["localhost:8008"]
+  - job_name: validator
+    scrape_interval: 20s
+    scrape_timeout: 20s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["localhost:5064"]
